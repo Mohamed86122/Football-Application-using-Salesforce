@@ -1,7 +1,7 @@
 <template>
     <lightning-card title="Matchs en direct" icon-name="standard:event">
         <template if:true={matches}>
-            <div class="slds-grid slds-wrap slds-gutters slds-p-around_medium">
+            <div class="slds-grid slds-wrap slds-gutters slds-p-around_medium" id="card">
                 <template for:each={matches} for:item="match">
                     <div key={match.matchTime} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
                         <div class="slds-card slds-p-around_medium slds-text-align_center slds-box slds-theme_default">
@@ -20,14 +20,12 @@
                                 <span>Status : {match.status}</span><br />
                                 <span>{match.matchTime}</span>
                             </div>
+                            <!-- Button to trigger the action for viewing the standings -->
+                            <lightning-button label="Voir le classement" onclick={handleButtonClick} data-home={match.homeTeam} data-away={match.awayTeam}></lightning-button>
                         </div>
                     </div>
                 </template>
             </div>
-        </template>
-
-        <template if:true={error}>
-            <p class="slds-text-color_error slds-p-around_medium">Erreur lors du chargement : {error.message}</p>
         </template>
     </lightning-card>
 </template>

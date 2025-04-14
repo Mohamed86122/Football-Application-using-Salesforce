@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Classement des équipes sélectionnées">
+        <template if:true={filteredStandings}>
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full text-sm text-left">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-6 py-3">Rang</th>
+                            <th class="px-6 py-3">Équipe</th>
+                            <th class="px-6 py-3">Pts</th>
+                            <th class="px-6 py-3">Matchs</th>
+                            <th class="px-6 py-3">Victoires</th>
+                            <th class="px-6 py-3">Nuls</th>
+                            <th class="px-6 py-3">Défaites</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={filteredStandings} for:item="team">
+                            <tr key={team.rank} class="hover:bg-gray-100">
+                                <td class="px-6 py-4">{team.rank}</td>
+                                <td class="px-6 py-4 flex items-center">
+                                    {team.teamName}
+                                </td>
+                                
+                                <td class="px-6 py-4">{team.points}</td>
+                                <td class="px-6 py-4">{team.played}</td>
+                                <td class="px-6 py-4">{team.win}</td>
+                                <td class="px-6 py-4">{team.draw}</td>
+                                <td class="px-6 py-4">{team.lose}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_medium">Erreur : {error.message}</p>
+        </template>
+    </lightning-card>
+</template>

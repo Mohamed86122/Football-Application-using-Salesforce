@@ -1,6 +1,20 @@
+/* Ajoutons un peu de style pour les cards et les logos */
 .team-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     object-fit: cover;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+    background-color: rgb(15, 80, 136);
+}
+
+#card
+{
+    background-color: rgb(15, 80, 136);
+    border-radius: 3%;
 }
