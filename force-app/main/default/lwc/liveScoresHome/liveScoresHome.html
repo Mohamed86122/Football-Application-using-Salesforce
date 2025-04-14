@@ -1,0 +1,38 @@
+<template>
+    <c-live-scores-list onmatchselect={handleMatchSelect}></c-live-scores-list>
+    
+    <template if:true={filteredStandings}>
+        <div class="bg-white p-4 mt-6 rounded-lg shadow-md">
+            <div class="text-xl font-bold mb-4">Classement des équipes sélectionnées</div>
+            <table class="table-auto w-full">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2">Rang</th>
+                        <th class="px-4 py-2">Équipe</th>
+                        <th class="px-4 py-2">Points</th>
+                        <th class="px-4 py-2">Matchs</th>
+                        <th class="px-4 py-2">Victoires</th>
+                        <th class="px-4 py-2">Nuls</th>
+                        <th class="px-4 py-2">Défaites</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredStandings} for:item="team">
+                        <tr key={team.rank} class="hover:bg-gray-100">
+                            <td class="px-4 py-2">{team.rank}</td>
+                            <td class="px-4 py-2 flex items-center">
+                                <img src={team.teamLogo} class="w-8 h-8 rounded-full mr-2" />
+                                {team.teamName}
+                            </td>
+                            <td class="px-4 py-2">{team.points}</td>
+                            <td class="px-4 py-2">{team.played}</td>
+                            <td class="px-4 py-2">{team.win}</td>
+                            <td class="px-4 py-2">{team.draw}</td>
+                            <td class="px-4 py-2">{team.lose}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+</template>
