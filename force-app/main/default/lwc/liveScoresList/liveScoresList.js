@@ -7,6 +7,11 @@ import TAILWIND_CSS from '@salesforce/resourceUrl/tailwindcss'; // Nom de ta res
 function generateLogo(teamName) {
     return `https://ui-avatars.com/api/?name=${teamName.replace(/\s/g, '+')}&background=random`;
 }
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR', options); // Format "jour mois année à heure:minute"
+}
 export default class LiveScoresList extends LightningElement {
     matches = [];
     error;
@@ -25,6 +30,13 @@ export default class LiveScoresList extends LightningElement {
     // Déclenche l'événement
     this.dispatchEvent(matchEvent);
 }
+get formattedMatchTime() {
+    return this.matches.map(match => ({
+        ...match,
+        formattedDate: formatDate(match.matchTime)
+    }));
+}
+
     @wire(getLiveMatches)
     wiredMatches({ error, data }) {
         if (data) {
