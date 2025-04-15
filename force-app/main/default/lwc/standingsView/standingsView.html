@@ -1,5 +1,38 @@
 <template>
     <lightning-card title="Classement des équipes sélectionnées">
+        <div class="slds-m-around_medium">
+            <!-- Sélecteurs pour le Pays, Ligue, Année -->
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox
+                        name="country"
+                        label="Pays"
+                        value={selectedCountry}
+                        options={countryOptions}
+                        onchange={handleCountryChange}
+                    ></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox
+                        name="league"
+                        label="Ligue"
+                        value={selectedLeague}
+                        options={leagueOptions}
+                        onchange={handleLeagueChange}
+                    ></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-combobox
+                        name="season"
+                        label="Année"
+                        value={selectedSeason}
+                        options={seasonOptions}
+                        onchange={handleSeasonChange}
+                    ></lightning-combobox>
+                </div>
+            </div>
+        </div>
+
         <template if:true={filteredStandings}>
             <div class="overflow-x-auto">
                 <table class="table-auto w-full text-sm text-left">
@@ -7,6 +40,7 @@
                         <tr>
                             <th class="px-6 py-3">Rang</th>
                             <th class="px-6 py-3">Équipe</th>
+                            <!-- <th class="px-6 py-3">Logo</th> -->
                             <th class="px-6 py-3">Pts</th>
                             <th class="px-6 py-3">Matchs</th>
                             <th class="px-6 py-3">Victoires</th>
@@ -19,9 +53,13 @@
                             <tr key={team.rank} class="hover:bg-gray-100">
                                 <td class="px-6 py-4">{team.rank}</td>
                                 <td class="px-6 py-4 flex items-center">
+                                    <!-- Utiliser le logo généré pour chaque équipe -->
+                                    <!-- <img src={teamLogos[team.teamName]} class="team-logo w-8 h-8 rounded-full mr-2" /> -->
                                     {team.teamName}
                                 </td>
-                                
+                                <td class="px-6 py-4">
+                                    <!-- <img src={teamLogos[team.teamName]} alt="Logo" class="team-logo w-8 h-8 rounded-full" /> -->
+                                </td>
                                 <td class="px-6 py-4">{team.points}</td>
                                 <td class="px-6 py-4">{team.played}</td>
                                 <td class="px-6 py-4">{team.win}</td>
